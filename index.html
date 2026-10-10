@@ -458,17 +458,39 @@
           ? "BUONO DA 10 € DISPONIBILE"
           : "CONTINUA AD ACCUMULARE PUNTI";
 
-      if (cliente.raccoltaScaduta) {
-        scadenzaEl.textContent =
-          "Punti scaduti: " +
-          (cliente.dataScadenza || "");
-      } else {
-        scadenzaEl.textContent =
-          cliente.dataScadenza
-            ? "Scadenza punti: " +
-              cliente.dataScadenza
-            : "Scadenza punti: da definire";
-      }
+     
+function ultimoGiornoValidita(dataScadenza) {
+  if (!dataScadenza) return "";
+
+  const parti = dataScadenza.split("/");
+  if (parti.length !== 3) return dataScadenza;
+
+  const giorno = Number(parti[0]);
+  const mese = Number(parti[1]);
+  const anno = Number(parti[2]);
+
+  const data = new Date(anno, mese - 1, giorno);
+  data.setDate(data.getDate() - 1);
+
+  return String(data.getDate()).padStart(2, "0") + "/" +
+    String(data.getMonth() + 1).padStart(2, "0") + "/" +
+    data.getFullYear();
+}
+
+const ultimoGiorno = ultimoGiornoValidita(
+  cliente.dataScadenza
+);
+
+if (cliente.raccoltaScaduta) {
+  scadenzaEl.textContent =
+    "Punti scaduti il: " + ultimoGiorno;
+} else {
+  scadenzaEl.textContent =
+    ultimoGiorno
+      ? "Punti validi fino al: " + ultimoGiorno
+      : "Scadenza punti: da definire";
+}
+
 
       erroreEl.textContent = "";
 
