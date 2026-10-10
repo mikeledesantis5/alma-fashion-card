@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+
+  <title>ALMA FASHION - Fidelity Card</title>
+
+  <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 12px;
+      min-height: 100vh;
+      background: #e8e8e8;
+      font-family: "Montserrat", Arial, sans-serif;
+      color: #080808;
+    }
+
+    .card-holder {
+      width: 100%;
+      max-width: 380px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .card {
+      width: 380px;
+      min-height: 565px;
+      background: white;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,.15);
+      transform-origin: top left;
+    }
+
+    /* TESTATA */
+
+    .header {
+      height: 136px;
+      padding: 13px 15px 10px;
+      background: #070707;
+      color: white;
+      text-align: center;
+    }
+
+    .alma {
+      font-family: "Bodoni Moda", Georgia, serif;
+      font-size: 62px;
+      font-weight: 500;
+      letter-spacing: -4px;
+      line-height: 1;
+    }
+
+    .fashion {
+      font-size: 20px;
+      letter-spacing: 10px;
+      padding-left: 10px;
+      margin-bottom: 8px;
+    }
+
+    .fidelity {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      font-size: 9px;
+      letter-spacing: 3px;
+    }
+
+    .fidelity::before,
+    .fidelity::after {
+      content: "";
+      width: 65px;
+      height: 1px;
+      background: #ddd;
+    }
+
+    /* CONTENUTO */
+
+    .content {
+      text-align: center;
+      padding: 12px 12px 14px;
+    }
+
+    .member-label {
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .nome {
+      font-family: "Bodoni Moda", Georgia, serif;
+      font-size: 33px;
+      font-weight: 600;
+      line-height: 1.08;
+      margin: 5px 0 11px;
+      overflow-wrap: anywhere;
+    }
+
+    /* QR CODE */
+
+    .qr-frame {
+      display: inline-flex;
+      padding: 7px;
+      border: 1px solid #ddd;
+      border-radius: 11px;
+      background: white;
+    }
+
+    #qrcode,
+    #qrcode img,
+    #qrcode canvas {
+      width: 128px !important;
+      height: 128px !important;
+    }
+
+    #qrcode img,
+    #qrcode canvas {
+      display: block;
+    }
+
+    .scan-label {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin: 7px 0 11px;
+    }
+
+    /* PUNTI */
+
+    .points-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .points-box {
+      background: #f2f2f2;
+      border-radius: 9px;
+      padding: 8px 4px 6px;
+    }
+
+    .points-label {
+      font-size: 8px;
+      font-weight: 600;
+      letter-spacing: .6px;
+      min-height: 19px;
+    }
+
+    .points-number {
+      font-family: "Bodoni Moda", Georgia, serif;
+      font-size: 36px;
+      font-weight: 500;
+      line-height: 1.1;
+    }
+
+    /* PREMIO */
+
+    .reward {
+      background: #080808;
+      color: white;
+      border-radius: 9px;
+      padding: 8px;
+    }
+
+    .reward-title {
+      font-family: "Bodoni Moda", Georgia, serif;
+      font-size: 27px;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    .reward-subtitle {
+      font-size: 8px;
+      letter-spacing: 2px;
+      margin-top: 3px;
+    }
+
+    .reward-status {
+      font-size: 9px;
+      font-weight: 700;
+      margin-top: 5px;
+    }
+
+    /* SCADENZA E AVVISI */
+
+    .expiry {
+      font-size: 11px;
+      margin: 10px 0 8px;
+    }
+
+    .divider {
+      border: 0;
+      border-top: 1px solid #999;
+      margin: 0 0 9px;
+    }
+
+    .terms {
+      font-size: 9px;
+      line-height: 1.45;
+      margin: 0 0 8px;
+    }
+
+    .earn-rule {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin: 0 0 10px;
+    }
+
+    .footer {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .55px;
+      line-height: 1.4;
+    }
+
+    .error {
+      color: #a00000;
+      font-size: 10px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card-holder" id="cardHolder">
+
+    <main class="card" id="card">
+
+      <header class="header">
+
+        <div class="alma">ALMA</div>
+
+        <div class="fashion">FASHION</div>
+
+        <div class="fidelity">
+          FIDELITY CARD
+        </div>
+
+      </header>
+
+      <section class="content">
+
+        <div class="member-label">
+          TESSERA PERSONALE
+        </div>
+
+        <h1 class="nome" id="nome">
+          Caricamento...
+        </h1>
+
+        <div class="qr-frame">
+          <div id="qrcode"></div>
+        </div>
+
+        <div class="scan-label">
+          MOSTRA QUESTO CODICE ALLA CASSA
+        </div>
+
+        <div class="points-row">
+
+          <div class="points-box">
+            <div class="points-label">
+              PUNTI DISPONIBILI
+            </div>
+            <div class="points-number" id="punti">
+              —
+            </div>
+          </div>
+
+          <div class="points-box">
+            <div class="points-label">
+              AL PROSSIMO BUONO
+            </div>
+            <div class="points-number" id="mancanti">
+              —
+            </div>
+          </div>
+
+        </div>
+
+        <div class="reward">
+
+          <div class="reward-title">
+            200 PUNTI = 10 €
+          </div>
+
+          <div class="reward-subtitle">
+            IL TUO PREMIO FEDELTÀ
+          </div>
+
+          <div class="reward-status" id="premio">
+            Caricamento...
+          </div>
+
+        </div>
+
+        <div class="expiry" id="scadenza">
+          Scadenza punti: da definire
+        </div>
+
+        <hr class="divider">
+
+        <p class="terms">
+          I punti hanno una validità di 12 mesi
+          dalla prima emissione.
+          Alla scadenza, punti e buoni non utilizzati
+          verranno azzerati.
+        </p>
+
+        <p class="earn-rule">
+          1 € DI SPESA = 1 PUNTO FEDELTÀ
+        </p>
+
+        <div class="footer">
+          ALMA FASHION · YOUR STYLE, YOUR REWARDS
+        </div>
+
+        <p class="error" id="errore"></p>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+    /*
+     * API PUBBLICA ALMA FASHION
+     */
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbwEmByYdoYmZ0ZF7IhJMpIUaJpAvmfmAc7APEec9s06VeECHCFbKZEomEEdbFRQ76c3/exec";
+
+    /*
+     * TESSERA DI PROVA ANNA.
+     * In seguito ogni cliente avrà il proprio codice.
+     */
+    const CODICE_PROVA =
+      "c240c8330d51444ea10dfc1abfe74c79";
+
+    const parametri = new URLSearchParams(
+      window.location.search
+    );
+
+    const codice = (
+      parametri.get("t") || CODICE_PROVA
+    ).trim().toLowerCase();
+
+    const nomeEl =
+      document.getElementById("nome");
+
+    const puntiEl =
+      document.getElementById("punti");
+
+    const mancantiEl =
+      document.getElementById("mancanti");
+
+    const premioEl =
+      document.getElementById("premio");
+
+    const scadenzaEl =
+      document.getElementById("scadenza");
+
+    const erroreEl =
+      document.getElementById("errore");
+
+    /*
+     * DIMENSIONI COMPATTE
+     */
+    function adattaTessera() {
+      const holder =
+        document.getElementById("cardHolder");
+
+      const card =
+        document.getElementById("card");
+
+      const scala = Math.min(
+        1,
+        holder.clientWidth / 380
+      );
+
+      card.style.transform =
+        "scale(" + scala + ")";
+
+      holder.style.height =
+        (card.scrollHeight * scala) + "px";
+    }
+
+    function mostraErrore(messaggio) {
+      nomeEl.textContent =
+        "Tessera non disponibile";
+
+      puntiEl.textContent = "—";
+      mancantiEl.textContent = "—";
+      premioEl.textContent = "";
+
+      erroreEl.textContent = messaggio;
+
+      adattaTessera();
+    }
+
+    /*
+     * AGGIORNA LA TESSERA CON I DATI
+     * RICEVUTI DA GOOGLE SHEETS
+     */
+    function aggiornaTessera(cliente) {
+      if (!cliente || cliente.errore) {
+        mostraErrore(
+          cliente && cliente.errore
+            ? cliente.errore
+            : "Tessera non trovata"
+        );
+        return;
+      }
+
+      const punti = Math.max(
+        0,
+        Number(cliente.punti) || 0
+      );
+
+      nomeEl.textContent =
+        cliente.nome || "Cliente";
+
+      puntiEl.textContent = punti;
+
+      mancantiEl.textContent =
+        Math.max(0, 200 - punti);
+
+      premioEl.textContent =
+        punti >= 200
+          ? "BUONO DA 10 € DISPONIBILE"
+          : "CONTINUA AD ACCUMULARE PUNTI";
+
+      if (cliente.raccoltaScaduta) {
+        scadenzaEl.textContent =
+          "Punti scaduti: " +
+          (cliente.dataScadenza || "");
+      } else {
+        scadenzaEl.textContent =
+          cliente.dataScadenza
+            ? "Scadenza punti: " +
+              cliente.dataScadenza
+            : "Scadenza punti: da definire";
+      }
+
+      erroreEl.textContent = "";
+
+      adattaTessera();
+    }
+
+    /*
+     * COLLEGAMENTO JSONP
+     * A GOOGLE APPS SCRIPT
+     */
+    function caricaDati() {
+      if (!/^[a-f0-9]{32}$/.test(codice)) {
+        mostraErrore(
+          "Codice tessera non valido"
+        );
+        return;
+      }
+
+      const callbackName =
+        "almaCallback_" + Date.now();
+
+      const script =
+        document.createElement("script");
+
+      let completato = false;
+
+      const timeout = setTimeout(function() {
+        if (!completato) {
+          completato = true;
+
+          mostraErrore(
+            "Impossibile aggiornare i punti."
+          );
+
+          script.remove();
+        }
+      }, 15000);
+
+      window[callbackName] = function(dati) {
+        if (completato) return;
+
+        completato = true;
+        clearTimeout(timeout);
+
+        aggiornaTessera(dati);
+
+        script.remove();
+
+        delete window[callbackName];
+      };
+
+      script.onerror = function() {
+        if (completato) return;
+
+        completato = true;
+        clearTimeout(timeout);
+
+        mostraErrore(
+          "Collegamento ai punti non disponibile."
+        );
+
+        script.remove();
+
+        delete window[callbackName];
+      };
+
+      script.src =
+        API_URL +
+        "?t=" + encodeURIComponent(codice) +
+        "&callback=" +
+        encodeURIComponent(callbackName) +
+        "&_=" + Date.now();
+
+      document.body.appendChild(script);
+    }
+
+    /*
+     * QR CODE PERSONALE
+     * Punta alla nuova tessera GitHub.
+     */
+    function creaQR() {
+      if (!/^[a-f0-9]{32}$/.test(codice)) {
+        return;
+      }
+
+      const urlTessera =
+        window.location.origin +
+        window.location.pathname +
+        "?t=" + encodeURIComponent(codice);
+
+      new QRCode(
+        document.getElementById("qrcode"),
+        {
+          text: urlTessera,
+          width: 128,
+          height: 128,
+          colorDark: "#000000",
+          colorLight: "#ffffff",
+          correctLevel:
+            QRCode.CorrectLevel.M
+        }
+      );
+    }
+
+    try {
+      creaQR();
+    } catch (errore) {
+      erroreEl.textContent =
+        "Impossibile generare il QR code.";
+    }
+
+    caricaDati();
+
+    window.addEventListener(
+      "resize",
+      adattaTessera
+    );
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(
+        adattaTessera
+      );
+    }
+
+    adattaTessera();
+  </script>
+
+</body>
+</html>
